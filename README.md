@@ -99,6 +99,7 @@ Scribble aims to provide:
 ### Monorepo & Tooling
 
 - Turborepo
+- pnpm
 
 ### Communication
 
@@ -108,25 +109,35 @@ Scribble aims to provide:
 
 ## Project Structure (High Level)
 
-### Frontend
+```
+apps/
+  web/        # Next.js frontend
+  server/     # Backend (WebSockets + APIs)
+packages/
+  db/         # Prisma schema & client
+  shared/     # Shared types and utilities
+
+```
+
+### Frontend (apps/web)
 
 - Canvas rendering logic
 
 - Real-time event listeners
 
-- UI components built with Tailwind
+- Tailwind-based UI
 
 - State synchronization with backend
 
-### Backend
+### Backend (apps/server)
 
 - WebSocket server for live collaboration
 
 - REST APIs for rooms and sessions
 
-- Business logic for canvas state updates
+- Canvas state handling logic
 
-- Validation and event broadcasting
+- Event validation and broadcasting
 
 ### Database
 
@@ -134,21 +145,7 @@ Scribble aims to provide:
 
 - Canvas state snapshots
 
-- User/session associations
-
-## Future Scope
-
-- User authentication and ownership of boards
-
-- Version history and undo/redo across sessions
-
-- Export canvas as image or JSON
-
-- Cursor presence and live user indicators
-
-- Access control (read / write permissions)
-
-- Performance optimizations for large canvases
+- Session associations
 
 ## Quick Start
 
@@ -159,25 +156,16 @@ git clone https://github.com/your-username/scribble.git
 cd scribble
 ```
 
-### Install dependencies
-
-#### Backend
+### Install dependencies (Monorepo root)
 
 ```
-cd backend
-npm install
-```
-
-#### Frontend
+pnpm install
 
 ```
-cd frontend
-npm install
-```
 
-### Environment Variables (Backend)
+### Environment Variables
 
-Create a .env file:
+Create a .env file inside the backend app (apps/server):
 
 ```
 PORT=5000
@@ -186,14 +174,7 @@ DATABASE_URL=your_postgres_connection_string
 
 ### Run the application
 
-#### Start backend
-
 ```
-npm run dev
-```
+pnpm dev
 
-#### Start frontend
-
-```
-npm run dev
 ```
